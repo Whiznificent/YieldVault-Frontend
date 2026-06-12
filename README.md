@@ -32,3 +32,20 @@ src/
   constants/    assets and app config
   styles/       plain CSS, split by concern
 ```
+
+## Features
+
+- Landing page with hero and feature highlights
+- Dashboard showing protocol TVL, average APY and your aggregate position
+- Vault detail pages with deposit/withdraw forms and a live shares preview
+- Positions list with per-vault value and earned yield
+- Mock Stellar wallet (connect/disconnect, balances, signing)
+- Loading, error and empty states throughout
+
+## Scripts
+
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start the dev server     |
+| `npm run build`   | Build for production     |
+| `npm run preview` | Preview the build        |
