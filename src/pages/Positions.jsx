@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { usePositions } from '../hooks/usePositions.js';
 import { useWallet } from '../hooks/useWallet.js';
+import { useDocumentTitle } from '../hooks/useDocumentTitle.js';
 import PositionRow from '../components/PositionRow.jsx';
 import StatCard from '../components/StatCard.jsx';
 import Loader from '../components/Loader.jsx';
@@ -13,6 +14,7 @@ import { formatUsd, formatAmount } from '../utils/format.js';
  * Positions page: the user's open vault positions and total earned yield.
  */
 export default function Positions() {
+  useDocumentTitle('Positions');
   const { isConnected } = useWallet();
   const { positions, loading, error, reload } = usePositions();
 
