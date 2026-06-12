@@ -62,3 +62,14 @@ export function shortenAddress(address) {
   if (address.length <= 12) return address;
   return `${address.slice(0, 4)}...${address.slice(-4)}`;
 }
+
+/**
+ * Clamp a number into the inclusive [min, max] range.
+ * @param {number} value
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
+export function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
