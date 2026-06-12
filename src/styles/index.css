@@ -43,6 +43,14 @@ a {
   text-decoration: none;
 }
 
+/* Visible keyboard focus ring for interactive elements. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 h1,
 h2,
 h3 {
