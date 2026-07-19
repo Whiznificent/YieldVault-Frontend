@@ -7,13 +7,13 @@
 .hero-title {
   font-size: 2.6rem;
   line-height: 1.15;
-  max-width: 700px;
+  max-width: 43.75rem; /* 700px @ 16px – scales with browser font size */
   margin: 0 auto 1rem;
 }
 
 .hero-subtitle {
   color: var(--muted);
-  max-width: 560px;
+  max-width: 35rem; /* 560px @ 16px – scales with browser font size */
   margin: 0 auto 2rem;
   font-size: 1.05rem;
 }

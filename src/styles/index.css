@@ -17,7 +17,7 @@
   --gain: #2ecc71;
   --loss: #e74c3c;
   --radius: 12px;
-  --max-width: 1080px;
+  --max-width: 67.5rem; /* 1080px @ 16px base – scales with browser font size */
 }
 
 /* Light theme overrides, opt in via [data-theme="light"] on <html>. */
@@ -32,6 +32,10 @@
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  font-size: 100%; /* Respect the browser's default font size for proper font scaling */
 }
 
 html,

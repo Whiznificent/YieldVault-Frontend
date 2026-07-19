@@ -383,7 +383,7 @@
 
 .empty-message {
   color: var(--muted);
-  max-width: 360px;
+  max-width: 22.5rem; /* 360px @ 16px – scales with browser font size */
 }
 
 .empty-action {
@@ -498,7 +498,7 @@
 
 .modal-panel {
   width: 100%;
-  max-width: 440px;
+  max-width: 27.5rem; /* 440px @ 16px – scales with browser font size */
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -688,6 +688,6 @@
 }
 
 .vault-actions {
-  max-width: 420px;
+  max-width: 26.25rem; /* 420px @ 16px – scales with browser font size */
   margin-top: 1.5rem;
 }
