@@ -3,8 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { useVault } from '../hooks/useVault.js';
 import StatCard from '../components/StatCard.jsx';
 import Tabs from '../components/Tabs.jsx';
-import DepositForm from '../components/DepositForm.jsx';
-import WithdrawForm from '../components/WithdrawForm.jsx';
+import DepositWizard from '../components/DepositWizard.jsx';
+import WithdrawWizard from '../components/WithdrawWizard.jsx';
 import Loader from '../components/Loader.jsx';
 import ErrorMessage from '../components/ErrorMessage.jsx';
 import { formatUsd, formatPercent, formatAmount } from '../utils/format.js';
@@ -17,7 +17,8 @@ const TABS = [
 ];
 
 /**
- * Vault detail page: stats plus deposit/withdraw forms in a tab switcher.
+ * Vault detail page: stats plus multi-step deposit/withdraw wizards.
+ * Each action is a guided multi-step flow (Amount → Review → Confirm).
  */
 export default function VaultDetail() {
   const { id } = useParams();
@@ -64,9 +65,9 @@ export default function VaultDetail() {
       <div className="vault-actions">
         <Tabs tabs={TABS} active={tab} onChange={setTab} />
         {tab === 'deposit' ? (
-          <DepositForm vault={vault} onSuccess={reload} />
+          <DepositWizard vault={vault} onSuccess={reload} />
         ) : (
-          <WithdrawForm vault={vault} onSuccess={reload} />
+          <WithdrawWizard vault={vault} onSuccess={reload} />
         )}
       </div>
     </div>
