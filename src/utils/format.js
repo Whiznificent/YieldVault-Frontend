@@ -2,6 +2,7 @@
  * Formatting helpers for currency, percentages and addresses.
  * Pure functions — no side effects, safe to use anywhere in the UI.
  */
+import { DEFAULT_LOCALE } from '../constants/i18n.js';
 
 /**
  * Format a number as a currency-style amount with thousands separators.
@@ -12,7 +13,7 @@
 export function formatAmount(value, decimals = 2) {
   const num = Number(value);
   if (!Number.isFinite(num)) return '0.00';
-  return num.toLocaleString('en-US', {
+  return num.toLocaleString(DEFAULT_LOCALE, {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
   });

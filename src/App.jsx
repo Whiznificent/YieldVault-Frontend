@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
+import { DEFAULT_LANG } from './constants/i18n';
+import useDocumentLang from './hooks/useDocumentLang';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -12,8 +14,11 @@ import NotFound from './pages/NotFound';
  * Root layout: persistent navbar/footer with routed page content.
  */
 export default function App() {
+  useDocumentLang(DEFAULT_LANG);
   return (
-    <div className="app">
+    // Explicit lang keeps the app subtree correctly tagged even when it is
+    // mounted inside a host page that declares a different language.
+    <div className="app" lang={DEFAULT_LANG}>
       <Navbar />
       <main className="app-main">
         <ErrorBoundary>

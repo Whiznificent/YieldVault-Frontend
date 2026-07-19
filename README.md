@@ -46,6 +46,8 @@ src/
 - **Browser font scaling** — all font sizes use `rem` units and layout
   constraints scale proportionally, so the UI respects the user's browser
   default font size setting
+- **i18n readiness** — explicit `lang` attributes and a single source of
+  truth for language/locale (see below)
 
 ## Design & Typography System
 
@@ -71,6 +73,25 @@ To quickly apply standardized font properties, the design system exposes utility
 - Sizes: `.text-xs`, `.text-sm`, `.text-base`, `.text-md`, `.text-lg`, `.text-xl`, `.text-2xl`, `.text-3xl`, `.text-4xl`, `.text-5xl`
 - Weights: `.fw-normal`, `.fw-medium`, `.fw-semibold`, `.fw-bold`
 
+## Internationalization (i18n) readiness
+
+The UI ships in English only, but the groundwork for localization is in place:
+
+- `index.html` declares `lang="en"` on the root element for the initial paint.
+- `src/constants/i18n.js` is the single source of truth for language and
+  locale: `DEFAULT_LANG`, `SUPPORTED_LANGS`, `LOCALE_BY_LANG`, plus
+  `resolveLang()` / `getLocale()` helpers that normalize any BCP 47 tag
+  (e.g. `en-GB` → `en`) and fall back safely.
+- `hooks/useDocumentLang` keeps `document.documentElement.lang` in sync at
+  runtime, so assistive technology and browser translation tools always see
+  the correct language — the app root also carries an explicit `lang`
+  attribute.
+- Formatters (`utils/format.js`) read their locale from the i18n constants
+  instead of hardcoding one.
+
+To add a language later: add it to `SUPPORTED_LANGS` and `LOCALE_BY_LANG`,
+then drive `useDocumentLang(lang)` from user/browser preference.
+
 ## Utilities & hooks
 
 Reusable building blocks live under `src/utils` and `src/hooks`:
@@ -78,9 +99,11 @@ Reusable building blocks live under `src/utils` and `src/hooks`:
 - `utils/format.js` — currency, percent, share and address formatting
 - `utils/positions.js` — portfolio aggregation (`summarizePositions`)
 - `utils/shares.js` — vault share-price and deposit/withdraw math
+- `constants/i18n.js` — language/locale constants and helpers
 - `hooks/useMediaQuery` — subscribe to a CSS media query
 - `hooks/useClipboard` — copy text with transient "copied" feedback
 - `hooks/useDocumentTitle` — set the browser tab title per page
+- `hooks/useDocumentLang` — keep the document `lang` attribute in sync
 
 ## Scripts
 

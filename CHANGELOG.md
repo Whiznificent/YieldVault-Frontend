@@ -7,6 +7,12 @@ project follows [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- i18n readiness: language/locale constants (`src/constants/i18n.js`) as the
+  single source of truth, a `useDocumentLang` hook that keeps
+  `document.documentElement.lang` in sync at runtime, an explicit `lang`
+  attribute on the app root, and formatters that read the locale from the
+  i18n constants instead of hardcoding `en-US`.
+
 - Multi-step form wizard (`FormWizard`) — a reusable component with step
   indicator, animated panel transitions, per-step validation, progress bar,
   keyboard support, and customizable submit labels.
