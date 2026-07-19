@@ -23,8 +23,8 @@ the values. All variables are optional.
 
 ```
 src/
-  components/   reusable UI (Button, StatCard, VaultCard, forms, ...)
-  pages/        routed views (Home, Dashboard, VaultDetail, Positions)
+  components/   reusable UI (Button, StatCard, VaultCard, FormWizard, ...)
+  pages/        routed views (Home, Dashboard, VaultDetail, Positions, WizardDemo)
   hooks/        data hooks (useWallet, useVault, useVaults, usePositions)
   context/      AppContext for shared wallet state
   services/     mock api / wallet / vault services
@@ -37,7 +37,9 @@ src/
 
 - Landing page with hero and feature highlights
 - Dashboard showing protocol TVL, average APY and your aggregate position
-- Vault detail pages with deposit/withdraw forms and a live shares preview
+- Vault detail pages with multi-step deposit/withdraw wizards (Amount → Review → Confirm) and a live shares preview
+- Multi-step form wizard (`FormWizard`) for any guided step-by-step flow — reusable component with validation, animated transitions, progress tracking, and keyboard support
+- Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
 - Positions list with per-vault value and earned yield
 - Mock Stellar wallet (connect/disconnect, balances, signing)
 - Loading, error and empty states throughout
@@ -59,4 +61,5 @@ Reusable building blocks live under `src/utils` and `src/hooks`:
 | ----------------- | ------------------------ |
 | `npm run dev`     | Start the dev server     |
 | `npm run build`   | Build for production     |
+| `npm run test`    | Run the test suite        |
 | `npm run preview` | Preview the build        |

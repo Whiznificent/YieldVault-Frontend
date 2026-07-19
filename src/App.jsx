@@ -6,6 +6,7 @@ import Home from './pages/Home.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import VaultDetail from './pages/VaultDetail.jsx';
 import Positions from './pages/Positions.jsx';
+import WizardDemo from './pages/WizardDemo.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 /**
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/vault/:id" element={<VaultDetail />} />
             <Route path="/positions" element={<Positions />} />
+            <Route path="/wizard-demo" element={<WizardDemo />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ErrorBoundary>

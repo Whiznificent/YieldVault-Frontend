@@ -8,4 +8,10 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./test/setup.js'],
+    globals: true,
+    exclude: ['test/lib/**', 'node_modules/**'],
+  },
 });
