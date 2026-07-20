@@ -46,6 +46,9 @@ src/
 - **Browser font scaling** — all font sizes use `rem` units and layout
   constraints scale proportionally, so the UI respects the user's browser
   default font size setting
+- **Idle-session auto-lock** — after 15 minutes of inactivity the wallet
+  auto-disconnects for security. A warning modal with a live countdown
+  appears 1 minute before, letting the user extend the session.
 
 ## Design & Typography System
 
@@ -80,6 +83,7 @@ Reusable building blocks live under `src/utils` and `src/hooks`:
 - `utils/shares.js` — vault share-price and deposit/withdraw math
 - `hooks/useMediaQuery` — subscribe to a CSS media query
 - `hooks/useClipboard` — copy text with transient "copied" feedback
+- `hooks/useIdleTimer` — detect user inactivity with configurable timeout and warning threshold
 - `hooks/useDocumentTitle` — set the browser tab title per page
 
 ## Scripts

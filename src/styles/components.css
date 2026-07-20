@@ -971,6 +971,56 @@
   border-color: var(--primary);
 }
 
+/* ──────────────────────────────────────────── */
+/* Session timeout modal                       */
+/* ──────────────────────────────────────────── */
+
+.session-timeout-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  text-align: center;
+}
+
+.session-timeout-message {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: var(--lh-relaxed);
+}
+
+.session-timeout-countdown {
+  font-family: monospace;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--accent);
+  background: rgba(0, 209, 178, 0.1);
+  padding: 0.1rem 0.5rem;
+  border-radius: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.session-timeout-urgent {
+  color: #fff;
+  background: var(--loss);
+  animation: timeout-pulse 1s ease-in-out infinite;
+}
+
+@keyframes timeout-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.session-timeout-hint {
+  margin: 0;
+  font-size: var(--fs-sm);
+}
+
+.session-timeout-actions {
+  margin-top: 0.25rem;
+}
+
 /* Vault detail */
 .vault-header {
   display: flex;

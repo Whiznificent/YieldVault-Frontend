@@ -7,6 +7,10 @@ project follows [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- **Idle-session auto-lock** — monitors user activity and warns 1 minute
+  before auto-disconnecting the wallet after 15 minutes of inactivity.
+  Includes a `SessionTimeoutModal` countdown with a "Stay Connected"
+  button, the `useIdleTimer` hook, and visual urgency pulse under 30 s.
 - Multi-step form wizard (`FormWizard`) — a reusable component with step
   indicator, animated panel transitions, per-step validation, progress bar,
   keyboard support, and customizable submit labels.
