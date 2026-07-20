@@ -1,8 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import WalletButton from './WalletButton';
+import NetworkToggle from './NetworkToggle';
 
 /**
- * Top navigation bar with brand, primary links and the wallet control.
+ * Top navigation bar with brand, primary links, network toggle and the
+ * wallet control.
  */
 export default function Navbar() {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
@@ -28,6 +30,7 @@ export default function Navbar() {
           Wizard
         </NavLink>
       </div>
+      <NetworkToggle />
       <WalletButton />
     </nav>
   );
