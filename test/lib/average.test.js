@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import average from '../../src/lib/numbers/average.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const average = require('../../src/lib/numbers/average.js');
-
-test('average returns the expected result', () => {
-  assert.deepStrictEqual(average([1, 2, 3]), 2);
+describe('average', () => {
+  it('returns the expected result', () => {
+    expect(average([1, 2, 3])).toBe(2);
+  });
 });

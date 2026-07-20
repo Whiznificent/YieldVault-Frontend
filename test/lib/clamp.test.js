@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import clamp from '../../src/lib/numbers/clamp.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const clamp = require('../../src/lib/numbers/clamp.js');
-
-test('clamp returns the expected result', () => {
-  assert.deepStrictEqual(clamp(5, 0, 3), 3);
+describe('clamp', () => {
+  it('returns the expected result', () => {
+    expect(clamp(5, 0, 3)).toBe(3);
+  });
 });

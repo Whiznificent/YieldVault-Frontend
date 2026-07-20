@@ -28,6 +28,12 @@ project follows [Semantic Versioning](https://semver.org/).
 - Validators for Stellar addresses and percentage ranges.
 - Vault metadata and risk-tier constants under `src/constants/vaults.js`.
 - Opt-in light theme via a persisted `data-theme` attribute.
+- `prefers-contrast` media query support — automatic high-contrast mode
+  with stronger borders and improved text readability, plus a low-contrast
+  mode with softer visuals for light-sensitive users.
+- Converted all `src/lib/` utility modules from CommonJS to ES module
+  syntax (`export default`) and migrated `test/lib/` suites from
+  `node:test` to `vitest` for consistency.
 
 ## [0.1.0]
 

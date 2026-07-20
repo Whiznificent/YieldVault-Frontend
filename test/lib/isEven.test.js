@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import isEven from '../../src/lib/numbers/isEven.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const isEven = require('../../src/lib/numbers/isEven.js');
-
-test('isEven returns the expected result', () => {
-  assert.deepStrictEqual(isEven(4), true);
+describe('isEven', () => {
+  it('returns the expected result', () => {
+    expect(isEven(4)).toBe(true);
+  });
 });

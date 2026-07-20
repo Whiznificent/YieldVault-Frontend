@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import median from '../../src/lib/numbers/median.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const median = require('../../src/lib/numbers/median.js');
-
-test('median returns the expected result', () => {
-  assert.deepStrictEqual(median([3, 1, 2]), 2);
+describe('median', () => {
+  it('returns the expected result', () => {
+    expect(median([3, 1, 2])).toBe(2);
+  });
 });

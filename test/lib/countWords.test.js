@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import countWords from '../../src/lib/strings/countWords.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const countWords = require('../../src/lib/strings/countWords.js');
-
-test('countWords returns the expected result', () => {
-  assert.deepStrictEqual(countWords('a b c'), 3);
+describe('countWords', () => {
+  it('returns the expected result', () => {
+    expect(countWords('a b c')).toBe(3);
+  });
 });

@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import compact from '../../src/lib/arrays/compact.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const compact = require('../../src/lib/arrays/compact.js');
-
-test('compact returns the expected result', () => {
-  assert.deepStrictEqual(compact([0, 1, 2, null, 3]), [1, 2, 3]);
+describe('compact', () => {
+  it('returns the expected result', () => {
+    expect(compact([0, 1, 2, null, 3])).toEqual([1, 2, 3]);
+  });
 });

@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import chunk from '../../src/lib/arrays/chunk.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const chunk = require('../../src/lib/arrays/chunk.js');
-
-test('chunk returns the expected result', () => {
-  assert.deepStrictEqual(chunk([1, 2, 3], 2), [[1, 2], [3]]);
+describe('chunk', () => {
+  it('returns the expected result', () => {
+    expect(chunk([1, 2, 3], 2)).toEqual([[1, 2], [3]]);
+  });
 });
