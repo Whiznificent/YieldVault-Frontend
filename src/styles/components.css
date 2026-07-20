@@ -304,6 +304,70 @@
   font-size: var(--fs-xs);
 }
 
+/* Resizable Table */
+.resizable-table-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.resizable-table-header {
+  display: grid;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
+}
+
+.resizable-table-header-cell {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: col-resize;
+  background: transparent;
+  transition: background 0.15s ease;
+}
+
+.resize-handle:hover,
+.resize-handle:active {
+  background: var(--primary);
+  opacity: 0.3;
+}
+
+.resizable-table-body {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.resizable-table-row {
+  display: grid !important;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  transition: border-color 0.15s ease;
+}
+
+.resizable-table-row:hover {
+  border-color: var(--primary);
+}
+
 /* Loader */
 .loader {
   display: flex;
@@ -984,6 +1048,31 @@
 
 .wallet-address:hover {
   border-color: var(--primary);
+}
+
+/* Environment banner */
+.environment-banner {
+  background: linear-gradient(90deg, #f39c12, #e67e22);
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.environment-banner-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Network warning */
+.network-warning {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
 }
 
 /* Vault detail */

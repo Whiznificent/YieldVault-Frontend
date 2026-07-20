@@ -7,6 +7,7 @@ import { useAppContext } from '../context/AppContext';
  *   balances: Record<string, number>,
  *   connecting: boolean,
  *   error: string|null,
+ *   walletNetwork: string|null,
  *   isConnected: boolean,
  *   connect: () => Promise<void>,
  *   disconnect: () => Promise<void>,

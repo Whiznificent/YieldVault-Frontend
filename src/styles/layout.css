@@ -42,6 +42,32 @@
   display: flex;
   gap: 1rem;
   margin-left: auto;
+  transition: opacity 0.2s ease, max-height 0.2s ease;
+}
+
+.nav-links-collapsed {
+  display: none;
+}
+
+.nav-toggle {
+  display: none;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+  margin-left: auto;
+}
+
+.nav-toggle:hover {
+  border-color: var(--primary);
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .nav-link {

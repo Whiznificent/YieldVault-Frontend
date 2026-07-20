@@ -12,25 +12,7 @@ export function AppProvider({ children }) {
   const [balances, setBalances] = useState({});
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState(null);
-  const [timezone, setTimezoneState] = useState(() => {
-    try {
-      return (
-        localStorage.getItem('yieldvault:timezone') ||
-        Intl.DateTimeFormat().resolvedOptions().timeZone
-      );
-    } catch {
-      return 'UTC';
-    }
-  });
-
-  const setTimezone = useCallback((tz) => {
-    setTimezoneState(tz);
-    try {
-      localStorage.setItem('yieldvault:timezone', tz);
-    } catch {
-      /* storage unavailable — ignore */
-    }
-  }, []);
+  const [walletNetwork, setWalletNetwork] = useState(null);
 
   const connect = useCallback(async () => {
     setConnecting(true);
@@ -38,8 +20,10 @@ export function AppProvider({ children }) {
     try {
       const { address: addr } = await walletService.connect();
       const bal = await walletService.getBalances();
+      const network = await walletService.getNetwork();
       setAddress(addr);
       setBalances(bal);
+      setWalletNetwork(network);
     } catch (err) {
       setError(err.message || 'Failed to connect wallet');
     } finally {
@@ -51,6 +35,7 @@ export function AppProvider({ children }) {
     await walletService.disconnect();
     setAddress(null);
     setBalances({});
+    setWalletNetwork(null);
   }, []);
 
   const value = {
@@ -58,11 +43,10 @@ export function AppProvider({ children }) {
     balances,
     connecting,
     error,
+    walletNetwork,
     isConnected: Boolean(address),
     connect,
     disconnect,
-    timezone,
-    setTimezone,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

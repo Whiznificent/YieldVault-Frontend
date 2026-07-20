@@ -36,20 +36,20 @@ src/
 ## Features
 
 - Landing page with hero and feature highlights
-- Dashboard showing protocol TVL, average APY, your aggregate position, and when the data was last refreshed
+- Dashboard showing protocol TVL, average APY and your aggregate position
 - Vault detail pages with multi-step deposit/withdraw wizards (Amount → Review → Confirm) and a live shares preview
 - Multi-step form wizard (`FormWizard`) for any guided step-by-step flow — reusable component with validation, animated transitions, progress tracking, and keyboard support
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
-- Positions list with per-vault value, earned yield, and a last-updated timestamp; vault detail data also displays its refresh time
+- Positions list with per-vault value and earned yield
+- **Resizable table columns** — data tables feature interactive column resize handles for customizing column widths
 - Mock Stellar wallet (connect/disconnect, balances, signing)
-- Inactivity protection for connected wallets: a warning appears after 14 minutes, with a one-minute grace period before automatic sign-out
 - Loading, error and empty states throughout
+- **Collapsible navigation** — navigation links can be collapsed/expanded on mobile, with state persisted to localStorage
 - **Browser font scaling** — all font sizes use `rem` units and layout
   constraints scale proportionally, so the UI respects the user's browser
   default font size setting
-- **Idle-session auto-lock** — after 15 minutes of inactivity the wallet
-  auto-disconnects for security. A warning modal with a live countdown
-  appears 1 minute before, letting the user extend the session.
+- **Environment banner** — displays a prominent banner when running on testnet to help users distinguish between testnet and mainnet environments
+- **Network mismatch warning** — alerts users when their wallet is connected to a different network than the app is configured for, preventing accidental transactions on the wrong network
 
 ## Design & Typography System
 
@@ -84,15 +84,7 @@ Reusable building blocks live under `src/utils` and `src/hooks`:
 - `utils/shares.js` — vault share-price and deposit/withdraw math
 - `hooks/useMediaQuery` — subscribe to a CSS media query
 - `hooks/useClipboard` — copy text with transient "copied" feedback
-- `hooks/useIdleTimer` — detect user inactivity with configurable timeout and warning threshold
 - `hooks/useDocumentTitle` — set the browser tab title per page
-
-## Session timeout
-
-Connected wallet sessions are monitored for inactivity. After 14 minutes, the
-app displays a warning with a **Stay signed in** action. If it is not selected,
-the wallet disconnects one minute later. Keyboard, mouse, touch, and scrolling
-activity reset the timer before the warning is shown.
 
 ## Scripts
 

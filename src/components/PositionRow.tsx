@@ -23,7 +23,7 @@ export default function PositionRow({ position }: PositionRowProps) {
   const positive = position.earned >= 0;
 
   return (
-    <Link to={`/vault/${position.vaultId}`} className="position-row">
+    <Link to={`/vault/${position.vaultId}`} className="position-row resizable-table-row">
       <div className="position-asset">
         <span className="position-icon">{asset.icon}</span>
         <span>{position.asset}</span>

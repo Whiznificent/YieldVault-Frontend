@@ -2,31 +2,22 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
-import SessionTimeoutWarning from './components/SessionTimeoutWarning';
-import { useWallet } from './hooks/useWallet';
-import { useSessionTimeout } from './hooks/useSessionTimeout';
-import { CONFIG } from './constants/config';
+import EnvironmentBanner from './components/EnvironmentBanner';
+import NetworkWarning from './components/NetworkWarning';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import VaultDetail from './pages/VaultDetail';
 import Positions from './pages/Positions';
-import WizardDemo from './pages/WizardDemo';
 import NotFound from './pages/NotFound';
 
 /**
  * Root layout: persistent navbar/footer with routed page content.
  */
 export default function App() {
-  const { isConnected, disconnect } = useWallet();
-  const { showWarning, extendSession } = useSessionTimeout({
-    enabled: isConnected,
-    timeoutMs: CONFIG.sessionTimeoutMs,
-    warningMs: CONFIG.sessionWarningMs,
-    onTimeout: disconnect,
-  });
-
   return (
     <div className="app">
+      <EnvironmentBanner />
+      <NetworkWarning />
       <Navbar />
       <main className="app-main">
         <ErrorBoundary>
@@ -35,13 +26,11 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/vault/:id" element={<VaultDetail />} />
             <Route path="/positions" element={<Positions />} />
-            <Route path="/wizard-demo" element={<WizardDemo />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ErrorBoundary>
       </main>
       <Footer />
-      <SessionTimeoutWarning open={showWarning} onContinue={extendSession} />
     </div>
   );
 }
