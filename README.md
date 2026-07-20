@@ -42,6 +42,7 @@ src/
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
 - Positions list with per-vault value, earned yield, and a last-updated timestamp; vault detail data also displays its refresh time
 - Mock Stellar wallet (connect/disconnect, balances, signing)
+- Inactivity protection for connected wallets: a warning appears after 14 minutes, with a one-minute grace period before automatic sign-out
 - Loading, error and empty states throughout
 - **Browser font scaling** — all font sizes use `rem` units and layout
   constraints scale proportionally, so the UI respects the user's browser
@@ -81,6 +82,13 @@ Reusable building blocks live under `src/utils` and `src/hooks`:
 - `hooks/useMediaQuery` — subscribe to a CSS media query
 - `hooks/useClipboard` — copy text with transient "copied" feedback
 - `hooks/useDocumentTitle` — set the browser tab title per page
+
+## Session timeout
+
+Connected wallet sessions are monitored for inactivity. After 14 minutes, the
+app displays a warning with a **Stay signed in** action. If it is not selected,
+the wallet disconnects one minute later. Keyboard, mouse, touch, and scrolling
+activity reset the timer before the warning is shown.
 
 ## Scripts
 

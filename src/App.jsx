@@ -2,6 +2,10 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
+import SessionTimeoutWarning from './components/SessionTimeoutWarning';
+import { useWallet } from './hooks/useWallet';
+import { useSessionTimeout } from './hooks/useSessionTimeout';
+import { CONFIG } from './constants/config';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import VaultDetail from './pages/VaultDetail';
@@ -12,6 +16,14 @@ import NotFound from './pages/NotFound';
  * Root layout: persistent navbar/footer with routed page content.
  */
 export default function App() {
+  const { isConnected, disconnect } = useWallet();
+  const { showWarning, extendSession } = useSessionTimeout({
+    enabled: isConnected,
+    timeoutMs: CONFIG.sessionTimeoutMs,
+    warningMs: CONFIG.sessionWarningMs,
+    onTimeout: disconnect,
+  });
+
   return (
     <div className="app">
       <Navbar />
@@ -27,6 +39,7 @@ export default function App() {
         </ErrorBoundary>
       </main>
       <Footer />
+      <SessionTimeoutWarning open={showWarning} onContinue={extendSession} />
     </div>
   );
 }
