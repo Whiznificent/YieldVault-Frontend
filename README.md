@@ -46,6 +46,11 @@ src/
 - **Browser font scaling** — all font sizes use `rem` units and layout
   constraints scale proportionally, so the UI respects the user's browser
   default font size setting
+- **Tablet landscape layout** — a dedicated breakpoint for tablet-class
+  devices in landscape orientation (see `TABLET_LANDSCAPE_QUERY` in
+  `src/constants/breakpoints.js`) widens the deposit/withdraw panel and the
+  form wizard instead of leaving them phone-narrow, and tightens the
+  wizard's vertical spacing for the shorter viewport
 
 ## Design & Typography System
 

@@ -1,4 +1,35 @@
 /* Responsive adjustments for tablet and mobile widths. */
+
+/* Tablet landscape: wide but short viewports (iPad-class devices rotated to
+ * landscape). Without this, these widths just inherit the plain desktop
+ * layout, which leaves the deposit/withdraw panel and the form wizard
+ * needlessly narrow, and the wizard's fixed vertical spacing can push its
+ * nav row below the fold on a shorter landscape viewport.
+ * Keep the range in sync with TABLET_LANDSCAPE_QUERY in
+ * src/constants/breakpoints.js. */
+@media (min-width: 768px) and (max-width: 1180px) and (orientation: landscape) and (min-height: 500px) {
+  .vault-actions {
+    max-width: 37.5rem; /* 600px @ 16px – use the extra width instead of staying phone-narrow */
+  }
+
+  .form-wizard {
+    max-width: 37.5rem; /* 600px @ 16px */
+    margin: 0 auto;
+  }
+
+  .wizard-content {
+    min-height: 200px; /* less vertical room than a tall desktop viewport */
+  }
+
+  .wizard-panel-icon {
+    font-size: 2rem; /* trim the floating icon so the panel fits without scrolling */
+  }
+
+  .wizard-panel-desc {
+    margin-bottom: 0.85rem;
+  }
+}
+
 @media (max-width: 720px) {
   .navbar {
     flex-wrap: wrap;
