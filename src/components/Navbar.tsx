@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import WalletButton from './WalletButton';
+import ThemeToggle from './ThemeToggle';
+import TimezoneSelector from './TimezoneSelector';
 
 /**
  * Top navigation bar with brand, primary links and the wallet control.
@@ -25,7 +27,11 @@ export default function Navbar() {
           Wizard
         </NavLink>
       </div>
-      <WalletButton />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <ThemeToggle />
+        <TimezoneSelector />
+        <WalletButton />
+      </div>
     </nav>
   );
 }

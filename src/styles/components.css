@@ -986,3 +986,49 @@
   max-width: 26.25rem; /* 420px @ 16px – scales with browser font size */
   margin-top: 1.5rem;
 }
+
+/* Timezone Selector */
+.timezone-selector {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: var(--fs-sm);
+  color: var(--text);
+  transition: border-color 0.15s ease;
+  height: 2.2rem;
+}
+
+.timezone-selector:hover {
+  border-color: var(--primary);
+}
+
+.timezone-select {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--fw-medium);
+  outline: none;
+  cursor: pointer;
+  padding-right: 0.25rem;
+}
+
+.timezone-select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.last-updated-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+

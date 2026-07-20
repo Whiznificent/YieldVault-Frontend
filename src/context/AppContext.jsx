@@ -12,6 +12,25 @@ export function AppProvider({ children }) {
   const [balances, setBalances] = useState({});
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState(null);
+  const [timezone, setTimezoneState] = useState(() => {
+    try {
+      return (
+        localStorage.getItem('yieldvault:timezone') ||
+        Intl.DateTimeFormat().resolvedOptions().timeZone
+      );
+    } catch {
+      return 'UTC';
+    }
+  });
+
+  const setTimezone = useCallback((tz) => {
+    setTimezoneState(tz);
+    try {
+      localStorage.setItem('yieldvault:timezone', tz);
+    } catch {
+      /* storage unavailable — ignore */
+    }
+  }, []);
 
   const connect = useCallback(async () => {
     setConnecting(true);
@@ -42,6 +61,8 @@ export function AppProvider({ children }) {
     isConnected: Boolean(address),
     connect,
     disconnect,
+    timezone,
+    setTimezone,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
