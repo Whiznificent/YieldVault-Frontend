@@ -11,11 +11,9 @@ export const CONFIG = {
     'CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC',
   // Simulated network latency for mock services, in milliseconds.
   mockLatency: 600,
-
-  // Idle session auto-lock. After IDLE_TIMEOUT_MS of inactivity the wallet
-  // disconnects. IDLE_WARNING_MS before expiry a modal warns the user.
-  idleTimeoutMs: 15 * 60 * 1000, // 15 minutes
-  idleWarningMs: 1 * 60 * 1000,   // 1 minute warning
+  // End inactive wallet sessions after 15 minutes and warn one minute beforehand.
+  sessionTimeoutMs: 15 * 60 * 1000,
+  sessionWarningMs: 60 * 1000,
 };
 
 export default CONFIG;

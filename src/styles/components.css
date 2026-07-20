@@ -543,6 +543,11 @@
   margin-top: 0.75rem;
 }
 
+.session-timeout-message {
+  margin: 0 0 1rem;
+  color: var(--muted);
+}
+
 /* Alerts */
 .alert {
   display: flex;
