@@ -3,6 +3,7 @@
 @import './components.css';
 @import './home.css';
 @import './responsive.css';
+@import './print.css';
 
 :root {
   --bg: #0f1117;
