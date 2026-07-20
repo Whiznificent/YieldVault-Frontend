@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from './Button';
+import AmountInput from './AmountInput';
 import { useWallet } from '../hooks/useWallet.js';
 import { validateDeposit } from '../utils/validate.js';
 import { previewDeposit } from '../utils/shares.js';
@@ -64,15 +65,14 @@ export default function DepositForm({ vault, onSuccess }: DepositFormProps) {
         </span>
       </div>
       <div className="input-group">
-        <input
+        <AmountInput
           id="deposit-amount"
-          type="number"
+          value={amount}
+          onChange={setAmount}
+          disabled={!isConnected || submitting}
+          placeholder="0.00"
           min="0"
           step="any"
-          placeholder="0.00"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          disabled={!isConnected || submitting}
         />
         <button type="button" className="max-btn" onClick={handleMax}>
           MAX

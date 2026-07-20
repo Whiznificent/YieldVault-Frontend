@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Button from './Button';
+import AmountInput from './AmountInput';
 import { useWallet } from '../hooks/useWallet.js';
 import { usePositions } from '../hooks/usePositions.js';
 import { validateWithdraw } from '../utils/validate.js';
@@ -71,15 +72,14 @@ export default function WithdrawForm({ vault, onSuccess }: WithdrawFormProps) {
         </span>
       </div>
       <div className="input-group">
-        <input
+        <AmountInput
           id="withdraw-amount"
-          type="number"
+          value={amount}
+          onChange={setAmount}
+          disabled={!isConnected || submitting}
+          placeholder="0.00"
           min="0"
           step="any"
-          placeholder="0.00"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          disabled={!isConnected || submitting}
         />
         <button type="button" className="max-btn" onClick={handleMax}>
           MAX

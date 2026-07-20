@@ -23,7 +23,7 @@ the values. All variables are optional.
 
 ```
 src/
-  components/   reusable UI (Button, StatCard, VaultCard, FormWizard, ...)
+  components/   reusable UI (Button, StatCard, VaultCard, FormWizard, AmountInput, ...)
   pages/        routed views (Home, Dashboard, VaultDetail, Positions, WizardDemo)
   hooks/        data hooks (useWallet, useVault, useVaults, usePositions)
   context/      AppContext for shared wallet state
@@ -42,6 +42,7 @@ src/
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
 - Positions list with per-vault value and earned yield
 - **Resizable table columns** — data tables feature interactive column resize handles for customizing column widths
+- **Amount input with thousands separators** — deposit and withdraw forms now display amounts with comma separators for better readability (e.g., 1,000,000)
 - Mock Stellar wallet (connect/disconnect, balances, signing)
 - Loading, error and empty states throughout
 - **Collapsible navigation** — navigation links can be collapsed/expanded on mobile, with state persisted to localStorage
