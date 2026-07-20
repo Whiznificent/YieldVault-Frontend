@@ -23,7 +23,7 @@ the values. All variables are optional.
 
 ```
 src/
-  components/   reusable UI (Button, StatCard, VaultCard, FormWizard, AmountInput, ...)
+  components/   reusable UI (Button, StatCard, VaultCard, FormWizard, ...)
   pages/        routed views (Home, Dashboard, VaultDetail, Positions, WizardDemo)
   hooks/        data hooks (useWallet, useVault, useVaults, usePositions)
   context/      AppContext for shared wallet state
@@ -41,15 +41,16 @@ src/
 - Multi-step form wizard (`FormWizard`) for any guided step-by-step flow — reusable component with validation, animated transitions, progress tracking, and keyboard support
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
 - Positions list with per-vault value and earned yield
-- **Resizable table columns** — data tables feature interactive column resize handles for customizing column widths
-- **Amount input with thousands separators** — deposit and withdraw forms now display amounts with comma separators for better readability (e.g., 1,000,000)
 - Mock Stellar wallet (connect/disconnect, balances, signing)
 - Loading, error and empty states throughout
-- **Collapsible navigation** — navigation links can be collapsed/expanded on mobile, with state persisted to localStorage
 - **Browser font scaling** — all font sizes use `rem` units and layout
   constraints scale proportionally, so the UI respects the user's browser
   default font size setting
-- **Environment banner** — displays a prominent banner when running on testnet to help users distinguish between testnet and mainnet environments
+- **Tablet landscape layout** — a dedicated breakpoint for tablet-class
+  devices in landscape orientation (see `TABLET_LANDSCAPE_QUERY` in
+  `src/constants/breakpoints.js`) widens the deposit/withdraw panel and the
+  form wizard instead of leaving them phone-narrow, and tightens the
+  wizard's vertical spacing for the shorter viewport
 
 ## Design & Typography System
 
