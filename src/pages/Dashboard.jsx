@@ -4,6 +4,7 @@ import { useWallet } from '../hooks/useWallet.js';
 import { useDocumentTitle } from '../hooks/useDocumentTitle.js';
 import StatCard from '../components/StatCard';
 import VaultCard from '../components/VaultCard';
+import VaultApyChart from '../components/VaultApyChart';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import { formatUsd, formatPercent, formatAmount } from '../utils/format.js';
@@ -51,6 +52,9 @@ export default function Dashboard() {
           icon="🧾"
         />
       </div>
+
+      <h2 className="section-title">APY by vault</h2>
+      <VaultApyChart vaults={vaults} />
 
       <h2 className="section-title">Vaults</h2>
       <div className="vault-grid">

@@ -1,5 +1,5 @@
 import { withLatency, clone } from './api.js';
-import { MOCK_VAULTS, MOCK_POSITIONS } from './mockData.js';
+import { MOCK_VAULTS, MOCK_POSITIONS, MOCK_APY_HISTORY } from './mockData.js';
 import { previewDeposit, previewWithdraw } from '../utils/shares.js';
 
 /**
@@ -42,6 +42,22 @@ export async function getProtocolStats() {
   const avgApy =
     MOCK_VAULTS.reduce((sum, v) => sum + v.apy, 0) / MOCK_VAULTS.length;
   return withLatency({ totalTvl, avgApy, vaultCount: MOCK_VAULTS.length });
+}
+
+/**
+ * Fetch APY history for a single vault, most recent entry last. Mirrors
+ * YieldVault-Backend's GET /api/vaults/:id/apy-history response shape
+ * ({ vaultId, count, history }, history entries as { date, apy }).
+ * @param {string} vaultId
+ * @param {number} [days=30]
+ * @returns {Promise<{ vaultId: string, count: number, history: Array<{date: string, apy: number}> }>}
+ */
+export async function getVaultApyHistory(vaultId, days = 30) {
+  const vault = MOCK_VAULTS.find((v) => v.id === vaultId);
+  if (!vault) throw new Error('Vault not found');
+  const full = MOCK_APY_HISTORY[vaultId] || [];
+  const history = full.slice(-days);
+  return withLatency({ vaultId, count: history.length, history: clone(history) });
 }
 
 /**

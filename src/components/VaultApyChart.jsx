@@ -1,0 +1,40 @@
+import { useMemo, useState, useCallback } from 'react';
+import { useApyHistory } from '../hooks/useApyHistory.js';
+import { buildApySeries } from '../utils/chartSeries.js';
+import { formatPercent } from '../utils/format.js';
+import LineChart from './LineChart';
+import ChartLegend from './ChartLegend';
+import Loader from './Loader';
+import ErrorMessage from './ErrorMessage';
+
+/**
+ * APY-by-vault trend chart with a legend that toggles individual vaults'
+ * series on and off.
+ * @param {object} props
+ * @param {Array} props.vaults
+ */
+export default function VaultApyChart({ vaults }) {
+  const { history, loading, error, reload } = useApyHistory(vaults);
+  const [hiddenIds, setHiddenIds] = useState(() => new Set());
+
+  const series = useMemo(() => buildApySeries(vaults, history), [vaults, history]);
+
+  const toggleSeries = useCallback((id) => {
+    setHiddenIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
+
+  if (loading) return <Loader label="Loading APY history…" />;
+  if (error) return <ErrorMessage message={error} onRetry={reload} />;
+
+  return (
+    <div className="chart-card">
+      <LineChart series={series} hiddenIds={hiddenIds} formatY={formatPercent} />
+      <ChartLegend series={series} hiddenIds={hiddenIds} onToggle={toggleSeries} />
+    </div>
+  );
+}

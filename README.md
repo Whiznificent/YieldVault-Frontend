@@ -36,7 +36,9 @@ src/
 ## Features
 
 - Landing page with hero and feature highlights
-- Dashboard showing protocol TVL, average APY and your aggregate position
+- Dashboard showing protocol TVL, average APY and your aggregate position, plus
+  an APY-by-vault trend chart with a clickable legend to show/hide each
+  vault's series (`LineChart`/`ChartLegend`)
 - Vault detail pages with multi-step deposit/withdraw wizards (Amount → Review → Confirm) and a live shares preview
 - Multi-step form wizard (`FormWizard`) for any guided step-by-step flow — reusable component with validation, animated transitions, progress tracking, and keyboard support
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
@@ -78,6 +80,10 @@ Reusable building blocks live under `src/utils` and `src/hooks`:
 - `utils/format.js` — currency, percent, share and address formatting
 - `utils/positions.js` — portfolio aggregation (`summarizePositions`)
 - `utils/shares.js` — vault share-price and deposit/withdraw math
+- `utils/chartSeries.js` — build chart series from per-vault APY history, and
+  scale the axis domain from only the currently visible series
+- `hooks/useApyHistory` — load APY history per vault (one fetch per vault,
+  mirroring YieldVault-Backend's `GET /api/vaults/:id/apy-history`)
 - `hooks/useMediaQuery` — subscribe to a CSS media query
 - `hooks/useClipboard` — copy text with transient "copied" feedback
 - `hooks/useDocumentTitle` — set the browser tab title per page

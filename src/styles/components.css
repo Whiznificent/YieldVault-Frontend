@@ -49,6 +49,76 @@
   color: var(--text);
 }
 
+/* Line chart + legend */
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart-axis {
+  stroke: var(--border);
+  stroke-width: 1;
+}
+
+.chart-axis-label {
+  fill: var(--muted);
+  font-size: 10px;
+}
+
+.chart-line {
+  transition: opacity 0.15s ease;
+}
+
+.chart-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  padding: 0.15rem 0;
+}
+
+.chart-legend-item-hidden {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.chart-legend-swatch {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
 /* Stat cards */
 .stat-grid {
   display: grid;
