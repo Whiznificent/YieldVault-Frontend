@@ -1054,6 +1054,12 @@
   gap: 0.4rem;
 }
 
+/* Network warning */
+.network-warning {
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+}
+
 /* Vault detail */
 .vault-header {
   display: flex;

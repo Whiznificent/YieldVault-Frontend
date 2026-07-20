@@ -49,6 +49,7 @@ src/
   constraints scale proportionally, so the UI respects the user's browser
   default font size setting
 - **Environment banner** — displays a prominent banner when running on testnet to help users distinguish between testnet and mainnet environments
+- **Network mismatch warning** — alerts users when their wallet is connected to a different network than the app is configured for, preventing accidental transactions on the wrong network
 
 ## Design & Typography System
 

@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import EnvironmentBanner from './components/EnvironmentBanner';
+import NetworkWarning from './components/NetworkWarning';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import VaultDetail from './pages/VaultDetail';
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <div className="app">
       <EnvironmentBanner />
+      <NetworkWarning />
       <Navbar />
       <main className="app-main">
         <ErrorBoundary>

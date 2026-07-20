@@ -1,5 +1,6 @@
 import { withLatency, clone } from './api.js';
 import { MOCK_BALANCES } from './mockData.js';
+import { CONFIG } from '../constants/config.js';
 
 /**
  * Mock Stellar wallet service. Simulates connecting a Freighter-style
@@ -7,6 +8,18 @@ import { MOCK_BALANCES } from './mockData.js';
  */
 
 const MOCK_ADDRESS = 'GAYV7XALOK6PTT5XJVMGCPTUEPFM4AVSRCJ55ZDRIPSXYLD7VAULT';
+
+/**
+ * Get the current network the wallet is connected to.
+ * In a real implementation, this would query the wallet extension.
+ * For mock purposes, we simulate a mismatch based on environment.
+ * @returns {Promise<string>}
+ */
+export async function getNetwork() {
+  // Simulate network detection - in production this would come from the actual wallet
+  // For testing, we return the configured network to simulate correct connection
+  return withLatency(CONFIG.network);
+}
 
 /**
  * Connect the (mock) wallet and return the account address.
