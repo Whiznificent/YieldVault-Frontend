@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import EmptyState from '../components/EmptyState';
 import WalletButton from '../components/WalletButton';
+import LastUpdated from '../components/LastUpdated';
 import { formatUsd, formatAmount } from '../utils/format.js';
 import { summarizePositions } from '../utils/positions.js';
 
@@ -17,7 +18,7 @@ import { summarizePositions } from '../utils/positions.js';
 export default function Positions() {
   useDocumentTitle('Positions');
   const { isConnected } = useWallet();
-  const { positions, loading, error, reload } = usePositions();
+  const { positions, loading, error, lastUpdated, reload } = usePositions();
 
   if (!isConnected) {
     return (
@@ -53,6 +54,7 @@ export default function Positions() {
   return (
     <div className="positions">
       <h1 className="page-title">Your Positions</h1>
+      <LastUpdated timestamp={lastUpdated} />
 
       <div className="stat-grid">
         <StatCard label="Total Value" value={formatUsd(totalValue)} icon="💼" />

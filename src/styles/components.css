@@ -84,6 +84,16 @@
   color: var(--muted);
 }
 
+/* Data freshness */
+.last-updated {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: 0.25rem 0 1rem;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
 /* Vault cards */
 .vault-grid {
   display: grid;

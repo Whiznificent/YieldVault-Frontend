@@ -6,6 +6,7 @@ import StatCard from '../components/StatCard';
 import VaultCard from '../components/VaultCard';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
+import LastUpdated from '../components/LastUpdated';
 import { formatUsd, formatPercent, formatAmount } from '../utils/format.js';
 import { summarizePositions } from '../utils/positions.js';
 
@@ -15,7 +16,7 @@ import { summarizePositions } from '../utils/positions.js';
  */
 export default function Dashboard() {
   useDocumentTitle('Dashboard');
-  const { vaults, stats, loading, error, reload } = useVaults();
+  const { vaults, stats, loading, error, lastUpdated, reload } = useVaults();
   const { positions } = usePositions();
   const { isConnected } = useWallet();
 
@@ -27,6 +28,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <h1 className="page-title">Dashboard</h1>
+      <LastUpdated timestamp={lastUpdated} />
 
       <div className="stat-grid">
         <StatCard

@@ -36,11 +36,11 @@ src/
 ## Features
 
 - Landing page with hero and feature highlights
-- Dashboard showing protocol TVL, average APY and your aggregate position
+- Dashboard showing protocol TVL, average APY, your aggregate position, and when the data was last refreshed
 - Vault detail pages with multi-step deposit/withdraw wizards (Amount → Review → Confirm) and a live shares preview
 - Multi-step form wizard (`FormWizard`) for any guided step-by-step flow — reusable component with validation, animated transitions, progress tracking, and keyboard support
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
-- Positions list with per-vault value and earned yield
+- Positions list with per-vault value, earned yield, and a last-updated timestamp; vault detail data also displays its refresh time
 - Mock Stellar wallet (connect/disconnect, balances, signing)
 - Loading, error and empty states throughout
 - **Browser font scaling** — all font sizes use `rem` units and layout
