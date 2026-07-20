@@ -41,6 +41,7 @@ src/
 - Multi-step form wizard (`FormWizard`) for any guided step-by-step flow — reusable component with validation, animated transitions, progress tracking, and keyboard support
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
 - Positions list with per-vault value and earned yield
+- **Resizable table columns** — data tables feature interactive column resize handles for customizing column widths
 - Mock Stellar wallet (connect/disconnect, balances, signing)
 - Loading, error and empty states throughout
 - **Collapsible navigation** — navigation links can be collapsed/expanded on mobile, with state persisted to localStorage

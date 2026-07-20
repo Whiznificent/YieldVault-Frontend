@@ -39,9 +39,14 @@
     font-size: var(--fs-lg);
   }
 
-  .position-row {
+  .position-row,
+  .resizable-table-row {
     grid-template-columns: 1fr 1fr;
     row-gap: 0.6rem;
+  }
+
+  .resizable-table-header {
+    display: none;
   }
 
   .vault-actions {

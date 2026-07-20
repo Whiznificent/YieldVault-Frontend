@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
 import EmptyState from '../components/EmptyState';
 import WalletButton from '../components/WalletButton';
+import ResizableTable from '../components/ResizableTable';
 import { formatUsd, formatAmount } from '../utils/format.js';
 import { summarizePositions } from '../utils/positions.js';
 
@@ -64,11 +65,18 @@ export default function Positions() {
         <StatCard label="Open Positions" value={positions.length} icon="📑" />
       </div>
 
-      <div className="position-list">
+      <ResizableTable
+        columns={[
+          { id: 'asset', header: 'Asset', width: 150 },
+          { id: 'shares', header: 'Shares', width: 150 },
+          { id: 'value', header: 'Value', width: 150 },
+          { id: 'earned', header: 'Earned', width: 150 },
+        ]}
+      >
         {positions.map((position) => (
           <PositionRow key={position.vaultId} position={position} />
         ))}
-      </div>
+      </ResizableTable>
     </div>
   );
 }
