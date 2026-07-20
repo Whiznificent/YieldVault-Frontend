@@ -1035,6 +1035,25 @@
   border-color: var(--primary);
 }
 
+/* Environment banner */
+.environment-banner {
+  background: linear-gradient(90deg, #f39c12, #e67e22);
+  color: #fff;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.environment-banner-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 /* Vault detail */
 .vault-header {
   display: flex;

@@ -48,6 +48,7 @@ src/
 - **Browser font scaling** — all font sizes use `rem` units and layout
   constraints scale proportionally, so the UI respects the user's browser
   default font size setting
+- **Environment banner** — displays a prominent banner when running on testnet to help users distinguish between testnet and mainnet environments
 
 ## Design & Typography System
 
