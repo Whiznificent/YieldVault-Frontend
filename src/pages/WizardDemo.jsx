@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DEFAULT_LOCALE } from '../constants/i18n.js';
 import FormWizard from '../components/FormWizard.jsx';
-import Button from '../components/Button.jsx';
-import Alert from '../components/Alert.jsx';
+import Button from '../components/Button';
+import Alert from '../components/Alert';
 
 /**
  * Demo page showcasing the reusable FormWizard component.

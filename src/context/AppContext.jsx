@@ -1,27 +1,36 @@
 import { createContext, useContext, useState, useCallback } from 'react';
 import * as walletService from '../services/wallet.js';
-import { NETWORKS, DEFAULT_NETWORK } from '../lib/networks.js';
 
 /**
  * Global application context. Holds wallet connection state and balances,
- * plus the active Stellar network (testnet/mainnet), shared across pages.
+ * shared across pages so the wallet only connects once.
  */
 const AppContext = createContext(null);
-
-const NETWORK_STORAGE_KEY = 'yieldvault:network';
-
-function readInitialNetwork() {
-  if (typeof window === 'undefined') return DEFAULT_NETWORK;
-  const stored = window.localStorage.getItem(NETWORK_STORAGE_KEY);
-  return stored === 'mainnet' || stored === 'testnet' ? stored : DEFAULT_NETWORK;
-}
 
 export function AppProvider({ children }) {
   const [address, setAddress] = useState(null);
   const [balances, setBalances] = useState({});
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState(null);
-  const [network, setNetworkState] = useState(readInitialNetwork);
+  const [timezone, setTimezoneState] = useState(() => {
+    try {
+      return (
+        localStorage.getItem('yieldvault:timezone') ||
+        Intl.DateTimeFormat().resolvedOptions().timeZone
+      );
+    } catch {
+      return 'UTC';
+    }
+  });
+
+  const setTimezone = useCallback((tz) => {
+    setTimezoneState(tz);
+    try {
+      localStorage.setItem('yieldvault:timezone', tz);
+    } catch {
+      /* storage unavailable — ignore */
+    }
+  }, []);
 
   const connect = useCallback(async () => {
     setConnecting(true);
@@ -44,18 +53,6 @@ export function AppProvider({ children }) {
     setBalances({});
   }, []);
 
-  /** Switch the active network and persist the choice. */
-  const setNetwork = useCallback((next) => {
-    if (next !== 'mainnet' && next !== 'testnet') return;
-    setNetworkState(next);
-    window.localStorage.setItem(NETWORK_STORAGE_KEY, next);
-  }, []);
-
-  /** Flip between testnet and mainnet. */
-  const toggleNetwork = useCallback(() => {
-    setNetwork(network === 'mainnet' ? 'testnet' : 'mainnet');
-  }, [network, setNetwork]);
-
   const value = {
     address,
     balances,
@@ -64,11 +61,8 @@ export function AppProvider({ children }) {
     isConnected: Boolean(address),
     connect,
     disconnect,
-    network,
-    networkConfig: NETWORKS[network],
-    isMainnet: network === 'mainnet',
-    setNetwork,
-    toggleNetwork,
+    timezone,
+    setTimezone,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

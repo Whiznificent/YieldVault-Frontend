@@ -987,25 +987,48 @@
   margin-top: 1.5rem;
 }
 
-/* Network toggle (navbar) — reuses .tabs/.tab but sized for the navbar
-   instead of a full-width form control. Append this block to the end of
-   components.css. */
-.network-toggle {
-  display: flex;
+/* Timezone Selector */
+.timezone-selector {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.6rem;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
+  font-size: var(--fs-sm);
+  color: var(--text);
+  transition: border-color 0.15s ease;
+  height: 2.2rem;
 }
 
-.network-toggle .tabs {
-  padding: 0.2rem;
+.timezone-selector:hover {
+  border-color: var(--primary);
 }
 
-.network-toggle .tab {
-  flex: none;
-  padding: 0.35rem 0.7rem;
+.timezone-select {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--fw-medium);
+  outline: none;
+  cursor: pointer;
+  padding-right: 0.25rem;
+}
+
+.timezone-select option {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.last-updated-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
   font-size: var(--fs-xs);
+  color: var(--muted);
 }
 
-.network-toggle-warning {
-  white-space: nowrap;
-}

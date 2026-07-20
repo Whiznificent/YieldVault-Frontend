@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import WalletButton from './WalletButton';
-import NetworkToggle from './NetworkToggle';
+import ThemeToggle from './ThemeToggle';
+import TimezoneSelector from './TimezoneSelector';
 
 /**
- * Top navigation bar with brand, primary links, network toggle and the
- * wallet control.
+ * Top navigation bar with brand, primary links and the wallet control.
  */
 export default function Navbar() {
   const linkClass = ({ isActive }: { isActive: boolean }) =>
@@ -23,15 +23,15 @@ export default function Navbar() {
         <NavLink to="/positions" className={linkClass}>
           Positions
         </NavLink>
-        <NavLink to="/compare" className={linkClass}>
-          Compare
-        </NavLink>
         <NavLink to="/wizard-demo" className={linkClass}>
           Wizard
         </NavLink>
       </div>
-      <NetworkToggle />
-      <WalletButton />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <ThemeToggle />
+        <TimezoneSelector />
+        <WalletButton />
+      </div>
     </nav>
   );
 }

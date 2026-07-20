@@ -2,12 +2,11 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
-import IdleGuard from './components/IdleGuard';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import VaultDetail from './pages/VaultDetail';
 import Positions from './pages/Positions';
-import Compare from './pages/Compare';
+import WizardDemo from './pages/WizardDemo';
 import NotFound from './pages/NotFound';
 
 /**
@@ -16,7 +15,6 @@ import NotFound from './pages/NotFound';
 export default function App() {
   return (
     <div className="app">
-      <IdleGuard />
       <Navbar />
       <main className="app-main">
         <ErrorBoundary>
@@ -25,7 +23,7 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/vault/:id" element={<VaultDetail />} />
             <Route path="/positions" element={<Positions />} />
-            <Route path="/compare" element={<Compare />} />
+            <Route path="/wizard-demo" element={<WizardDemo />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ErrorBoundary>
