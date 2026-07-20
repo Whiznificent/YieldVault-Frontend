@@ -986,3 +986,26 @@
   max-width: 26.25rem; /* 420px @ 16px – scales with browser font size */
   margin-top: 1.5rem;
 }
+
+/* Network toggle (navbar) — reuses .tabs/.tab but sized for the navbar
+   instead of a full-width form control. Append this block to the end of
+   components.css. */
+.network-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.network-toggle .tabs {
+  padding: 0.2rem;
+}
+
+.network-toggle .tab {
+  flex: none;
+  padding: 0.35rem 0.7rem;
+  font-size: var(--fs-xs);
+}
+
+.network-toggle-warning {
+  white-space: nowrap;
+}
