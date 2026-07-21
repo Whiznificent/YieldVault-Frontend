@@ -44,6 +44,7 @@ src/
 - **Resizable table columns** — data tables feature interactive column resize handles for customizing column widths
 - **Amount input with thousands separators** — deposit and withdraw forms now display amounts with comma separators for better readability (e.g., 1,000,000)
 - **Slippage tolerance setting** — users can configure their maximum acceptable price slippage for transactions with preset options (0.1%, 0.5%, 1.0%) or custom values, persisted to localStorage
+- **Asset preference** — remembers the last used asset in the wizard and pre-selects it on subsequent visits, persisted to localStorage
 - Mock Stellar wallet (connect/disconnect, balances, signing)
 - Loading, error and empty states throughout
 - **Collapsible navigation** — navigation links can be collapsed/expanded on mobile, with state persisted to localStorage

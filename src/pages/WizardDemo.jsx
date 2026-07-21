@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import FormWizard from '../components/FormWizard.jsx';
 import Button from '../components/Button.jsx';
 import Alert from '../components/Alert.jsx';
+import { useAppContext } from '../context/AppContext';
 
 /**
  * Demo page showcasing the reusable FormWizard component.
@@ -10,11 +11,16 @@ import Alert from '../components/Alert.jsx';
  * step transitions, validation, review, and submission.
  */
 export default function WizardDemo() {
+  const { lastAsset, setLastAsset } = useAppContext();
   const [result, setResult] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
   const handleComplete = async (data) => {
     setSubmitting(true);
+    // Save the selected asset as a preference
+    if (data.asset) {
+      setLastAsset(data.asset);
+    }
     // Simulate a network request
     await new Promise((r) => setTimeout(r, 1500));
     setResult(data);
@@ -285,7 +291,7 @@ export default function WizardDemo() {
         steps={steps}
         initialData={{
           name: '',
-          asset: '',
+          asset: lastAsset || '',
           depositCap: '',
           strategy: '',
           strategyRisk: '',

@@ -7,7 +7,8 @@ import * as walletService from '../services/wallet.js';
  */
 const AppContext = createContext(null);
 
-const STORAGE_KEY = 'yieldvault:slippage-tolerance';
+const SLIPPAGE_STORAGE_KEY = 'yieldvault:slippage-tolerance';
+const ASSET_STORAGE_KEY = 'yieldvault:last-asset';
 
 export function AppProvider({ children }) {
   const [address, setAddress] = useState(null);
@@ -17,10 +18,17 @@ export function AppProvider({ children }) {
   const [walletNetwork, setWalletNetwork] = useState(null);
   const [slippageTolerance, setSlippageTolerance] = useState(() => {
     if (typeof localStorage !== 'undefined') {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      const stored = localStorage.getItem(SLIPPAGE_STORAGE_KEY);
       if (stored) return Number(stored);
     }
     return 0.5; // Default 0.5%
+  });
+  const [lastAsset, setLastAsset] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      const stored = localStorage.getItem(ASSET_STORAGE_KEY);
+      if (stored) return stored;
+    }
+    return null; // No default asset
   });
 
   const connect = useCallback(async () => {
@@ -49,11 +57,21 @@ export function AppProvider({ children }) {
 
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, String(slippageTolerance));
+      localStorage.setItem(SLIPPAGE_STORAGE_KEY, String(slippageTolerance));
     } catch {
       /* storage unavailable — ignore */
     }
   }, [slippageTolerance]);
+
+  useEffect(() => {
+    try {
+      if (lastAsset) {
+        localStorage.setItem(ASSET_STORAGE_KEY, lastAsset);
+      }
+    } catch {
+      /* storage unavailable — ignore */
+    }
+  }, [lastAsset]);
 
   const value = {
     address,
@@ -63,6 +81,8 @@ export function AppProvider({ children }) {
     walletNetwork,
     slippageTolerance,
     setSlippageTolerance,
+    lastAsset,
+    setLastAsset,
     isConnected: Boolean(address),
     connect,
     disconnect,
