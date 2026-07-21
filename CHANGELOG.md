@@ -35,6 +35,12 @@ project follows [Semantic Versioning](https://semver.org/).
   syntax (`export default`) and migrated `test/lib/` suites from
   `node:test` to `vitest` for consistency.
 
+### Changed
+
+- Added precision loss protection for large amounts in deposit/withdraw flows
+  by implementing `safeParseNumber` helper that validates against
+  `Number.MAX_SAFE_INTEGER` before parsing numeric values.
+
 ## [0.1.0]
 
 ### Added

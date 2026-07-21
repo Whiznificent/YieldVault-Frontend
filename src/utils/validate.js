@@ -3,6 +3,8 @@
  * Each validator returns { valid: boolean, error: string|null }.
  */
 
+import { safeParseNumber } from './format.js';
+
 /**
  * Validate a deposit amount against the user's wallet balance.
  * @param {string|number} amount
@@ -10,12 +12,13 @@
  * @returns {{ valid: boolean, error: string|null }}
  */
 export function validateDeposit(amount, balance) {
-  const num = Number(amount);
   if (amount === '' || amount === null || amount === undefined) {
     return { valid: false, error: 'Enter an amount' };
   }
-  if (!Number.isFinite(num)) {
-    return { valid: false, error: 'Amount must be a number' };
+  
+  const num = safeParseNumber(amount);
+  if (num === null) {
+    return { valid: false, error: 'Amount is too large or invalid' };
   }
   if (num <= 0) {
     return { valid: false, error: 'Amount must be greater than zero' };
@@ -33,12 +36,13 @@ export function validateDeposit(amount, balance) {
  * @returns {{ valid: boolean, error: string|null }}
  */
 export function validateWithdraw(amount, deposited) {
-  const num = Number(amount);
   if (amount === '' || amount === null || amount === undefined) {
     return { valid: false, error: 'Enter an amount' };
   }
-  if (!Number.isFinite(num)) {
-    return { valid: false, error: 'Amount must be a number' };
+  
+  const num = safeParseNumber(amount);
+  if (num === null) {
+    return { valid: false, error: 'Amount is too large or invalid' };
   }
   if (num <= 0) {
     return { valid: false, error: 'Amount must be greater than zero' };
