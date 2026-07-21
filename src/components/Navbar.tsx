@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import WalletButton from './WalletButton';
+import ThemeToggle from './ThemeToggle';
+import SlippageTolerance from './SlippageTolerance';
 
 /**
  * Top navigation bar with brand, primary links and the wallet control.
@@ -69,7 +71,11 @@ export default function Navbar() {
           Wizard
         </NavLink>
       </div>
-      <WalletButton />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <SlippageTolerance />
+        <ThemeToggle />
+        <WalletButton />
+      </div>
     </nav>
   );
 }

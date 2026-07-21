@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import * as walletService from '../services/wallet.js';
 
 /**
@@ -7,12 +7,21 @@ import * as walletService from '../services/wallet.js';
  */
 const AppContext = createContext(null);
 
+const STORAGE_KEY = 'yieldvault:slippage-tolerance';
+
 export function AppProvider({ children }) {
   const [address, setAddress] = useState(null);
   const [balances, setBalances] = useState({});
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState(null);
   const [walletNetwork, setWalletNetwork] = useState(null);
+  const [slippageTolerance, setSlippageTolerance] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) return Number(stored);
+    }
+    return 0.5; // Default 0.5%
+  });
 
   const connect = useCallback(async () => {
     setConnecting(true);
@@ -38,12 +47,22 @@ export function AppProvider({ children }) {
     setWalletNetwork(null);
   }, []);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, String(slippageTolerance));
+    } catch {
+      /* storage unavailable — ignore */
+    }
+  }, [slippageTolerance]);
+
   const value = {
     address,
     balances,
     connecting,
     error,
     walletNetwork,
+    slippageTolerance,
+    setSlippageTolerance,
     isConnected: Boolean(address),
     connect,
     disconnect,

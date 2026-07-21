@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import FormWizard from './FormWizard.jsx';
 import { useWallet } from '../hooks/useWallet.js';
+import { useAppContext } from '../context/AppContext';
 import { validateDeposit } from '../utils/validate.js';
 import { previewDeposit } from '../utils/shares.js';
 import { formatAmount } from '../utils/format.js';
@@ -16,6 +17,7 @@ import * as walletService from '../services/wallet.js';
  */
 export default function DepositWizard({ vault, onSuccess }) {
   const { isConnected, balanceOf } = useWallet();
+  const { slippageTolerance } = useAppContext();
   const [submitting, setSubmitting] = useState(false);
   const [receipt, setReceipt] = useState(null);
 
@@ -137,6 +139,10 @@ export default function DepositWizard({ vault, onSuccess }) {
           </span>
         </div>
         <div className="wizard-review-divider" />
+        <div className="wizard-review-row">
+          <span className="wizard-review-label">Slippage tolerance</span>
+          <span className="wizard-review-value">{slippageTolerance}%</span>
+        </div>
         <div className="wizard-review-row">
           <span className="wizard-review-label">Estimated APY</span>
           <span className="wizard-review-value" style={{ color: 'var(--accent)' }}>
