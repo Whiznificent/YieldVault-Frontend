@@ -5,9 +5,10 @@ import { usePositions } from '../hooks/usePositions.js';
 import { useAppContext } from '../context/AppContext';
 import { validateWithdraw } from '../utils/validate.js';
 import { previewWithdraw } from '../utils/shares.js';
-import { formatAmount } from '../utils/format.js';
+import { formatAmount, formatDate } from '../utils/format.js';
 import * as vaultService from '../services/vault.js';
 import * as walletService from '../services/wallet.js';
+import { useAppContext } from '../context/AppContext';
 
 /**
  * Multi-step withdraw wizard for a vault. Guides the user through
@@ -20,6 +21,7 @@ export default function WithdrawWizard({ vault, onSuccess }) {
   const { isConnected } = useWallet();
   const { positions } = usePositions();
   const { slippageTolerance } = useAppContext();
+  const { timezone } = useAppContext();
   const [submitting, setSubmitting] = useState(false);
   const [receipt, setReceipt] = useState(null);
 
@@ -68,7 +70,7 @@ export default function WithdrawWizard({ vault, onSuccess }) {
       await walletService.signAndSubmit(`Withdraw ${data.amount} ${vault.asset}`);
       // Set receipt first so the success UI renders before the parent
       // re-renders. Use a microtask delay to ensure the state update flushes.
-      setReceipt({ ...result, amount: data.amount, asset: vault.asset });
+      setReceipt({ ...result, amount: data.amount, asset: vault.asset, timestamp: Date.now() });
       await new Promise((r) => setTimeout(r, 50));
       onSuccess?.();
     } catch (err) {
@@ -192,9 +194,14 @@ export default function WithdrawWizard({ vault, onSuccess }) {
         <div className="wizard-success-desc">
           burning {formatAmount(receipt.shares)} shares.
         </div>
-        <span className="wizard-success-detail">
-          TX: {receipt.vaultId}::{Date.now().toString(36)}
-        </span>
+        <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.25rem', alignItems: 'center' }}>
+          <span className="wizard-success-detail" style={{ margin: 0 }}>
+            TX: {receipt.vaultId}::{receipt.timestamp?.toString(36) || Date.now().toString(36)}
+          </span>
+          <span className="wizard-success-detail" style={{ margin: 0, opacity: 0.85 }}>
+            Time: {formatDate(receipt.timestamp || Date.now(), timezone)}
+          </span>
+        </div>
       </div>
     );
   }

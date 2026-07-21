@@ -7,6 +7,7 @@ import DepositForm from '../components/DepositForm';
 import WithdrawForm from '../components/WithdrawForm';
 import Loader from '../components/Loader';
 import ErrorMessage from '../components/ErrorMessage';
+import LastUpdated from '../components/LastUpdated';
 import { formatUsd, formatPercent, formatAmount } from '../utils/format.js';
 import { sharePrice } from '../utils/shares.js';
 import { getAssetByCode } from '../constants/assets.js';
@@ -21,7 +22,7 @@ const TABS = [
  */
 export default function VaultDetail() {
   const { id } = useParams();
-  const { vault, loading, error, reload } = useVault(id);
+  const { vault, loading, error, lastUpdated, reload } = useVault(id);
   const [tab, setTab] = useState('deposit');
 
   if (loading) return <Loader label="Loading vault…" />;
@@ -42,6 +43,7 @@ export default function VaultDetail() {
         <div>
           <h1 className="page-title">{vault.name}</h1>
           <p className="muted">{vault.strategy}</p>
+          <LastUpdated timestamp={lastUpdated} />
         </div>
       </header>
 

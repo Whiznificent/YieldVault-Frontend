@@ -23,7 +23,7 @@ the values. All variables are optional.
 
 ```
 src/
-  components/   reusable UI (Button, StatCard, VaultCard, FormWizard, AmountInput, ...)
+  components/   reusable UI (Button, StatCard, VaultCard, FormWizard, ...)
   pages/        routed views (Home, Dashboard, VaultDetail, Positions, WizardDemo)
   hooks/        data hooks (useWallet, useVault, useVaults, usePositions)
   context/      AppContext for shared wallet state
@@ -36,7 +36,9 @@ src/
 ## Features
 
 - Landing page with hero and feature highlights
-- Dashboard showing protocol TVL, average APY and your aggregate position
+- Dashboard showing protocol TVL, average APY and your aggregate position, plus
+  an APY-by-vault trend chart with a clickable legend to show/hide each
+  vault's series (`LineChart`/`ChartLegend`)
 - Vault detail pages with multi-step deposit/withdraw wizards (Amount → Review → Confirm) and a live shares preview
 - Multi-step form wizard (`FormWizard`) for any guided step-by-step flow — reusable component with validation, animated transitions, progress tracking, and keyboard support
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
@@ -47,12 +49,14 @@ src/
 - **Asset preference** — remembers the last used asset in the wizard and pre-selects it on subsequent visits, persisted to localStorage
 - Mock Stellar wallet (connect/disconnect, balances, signing)
 - Loading, error and empty states throughout
-- **Collapsible navigation** — navigation links can be collapsed/expanded on mobile, with state persisted to localStorage
 - **Browser font scaling** — all font sizes use `rem` units and layout
   constraints scale proportionally, so the UI respects the user's browser
   default font size setting
-- **Environment banner** — displays a prominent banner when running on testnet to help users distinguish between testnet and mainnet environments
-- **Network mismatch warning** — alerts users when their wallet is connected to a different network than the app is configured for, preventing accidental transactions on the wrong network
+- **Tablet landscape layout** — a dedicated breakpoint for tablet-class
+  devices in landscape orientation (see `TABLET_LANDSCAPE_QUERY` in
+  `src/constants/breakpoints.js`) widens the deposit/withdraw panel and the
+  form wizard instead of leaving them phone-narrow, and tightens the
+  wizard's vertical spacing for the shorter viewport
 
 ## Design & Typography System
 
@@ -85,6 +89,10 @@ Reusable building blocks live under `src/utils` and `src/hooks`:
 - `utils/format.js` — currency, percent, share and address formatting
 - `utils/positions.js` — portfolio aggregation (`summarizePositions`)
 - `utils/shares.js` — vault share-price and deposit/withdraw math
+- `utils/chartSeries.js` — build chart series from per-vault APY history, and
+  scale the axis domain from only the currently visible series
+- `hooks/useApyHistory` — load APY history per vault (one fetch per vault,
+  mirroring YieldVault-Backend's `GET /api/vaults/:id/apy-history`)
 - `hooks/useMediaQuery` — subscribe to a CSS media query
 - `hooks/useClipboard` — copy text with transient "copied" feedback
 - `hooks/useDocumentTitle` — set the browser tab title per page

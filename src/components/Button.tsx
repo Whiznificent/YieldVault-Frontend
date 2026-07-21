@@ -1,34 +1,30 @@
 /**
  * Reusable button with primary/secondary/ghost variants.
- * @param {object} props
- * @param {React.ReactNode} props.children
- * @param {'primary'|'secondary'|'ghost'} [props.variant]
- * @param {boolean} [props.disabled]
- * @param {boolean} [props.loading]
- * @param {() => void} [props.onClick]
- * @param {'button'|'submit'} [props.type]
  */
+
+import React from 'react';
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost';
   loading?: boolean;
 }
 
-export default function Button({
-  children,
-  variant = 'primary',
-  disabled = false,
-  loading = false,
-  onClick,
-  type = 'button',
-}: ButtonProps) {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { children, variant = 'primary', disabled = false, loading = false, onClick, type = 'button', ...rest },
+  ref,
+) {
   return (
     <button
+      ref={ref}
       type={type}
       className={`btn btn-${variant}`}
       disabled={disabled || loading}
       onClick={onClick}
+      {...rest}
     >
       {loading ? 'Processing…' : children}
     </button>
   );
-}
+});
+
+export default Button;

@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import pick from '../../src/lib/objects/pick.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const pick = require('../../src/lib/objects/pick.js');
-
-test('pick returns the expected result', () => {
-  assert.deepStrictEqual(pick({ a: 1, b: 2 }, ['a']), { a: 1 });
+describe('pick', () => {
+  it('returns the expected result', () => {
+    expect(pick({ a: 1, b: 2 }, ['a'])).toEqual({ a: 1 });
+  });
 });

@@ -36,3 +36,21 @@ declare module '../utils/shares.js' {
     totalShares: number,
   ): number;
 }
+
+declare module '../utils/format.js' {
+  export function formatAmount(value: number, decimals?: number): string;
+  export function formatCompact(value: number): string;
+  export function formatShares(value: number, decimals?: number): string;
+  export function formatPercent(value: number, decimals?: number): string;
+  export function formatUsd(value: number): string;
+  export function formatApy(value: number, decimals?: number): string;
+  export function projectedYield(principal: number, apy: number): number;
+  export function formatSigned(value: number, decimals?: number): string;
+  export function shortenAddress(address: string): string;
+  export function clamp(value: number, min: number, max: number): number;
+  export function formatDate(
+    date: Date | string | number,
+    timeZone?: string,
+    options?: Intl.DateTimeFormatOptions,
+  ): string;
+}

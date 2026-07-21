@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import slugify from '../../src/lib/strings/slugify.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const slugify = require('../../src/lib/strings/slugify.js');
-
-test('slugify returns the expected result', () => {
-  assert.deepStrictEqual(slugify('Hi There!'), 'hi-there');
+describe('slugify', () => {
+  it('returns the expected result', () => {
+    expect(slugify('Hi There!')).toBe('hi-there');
+  });
 });

@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import isBlank from '../../src/lib/strings/isBlank.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const isBlank = require('../../src/lib/strings/isBlank.js');
-
-test('isBlank returns the expected result', () => {
-  assert.deepStrictEqual(isBlank('   '), true);
+describe('isBlank', () => {
+  it('returns the expected result', () => {
+    expect(isBlank('   ')).toBe(true);
+  });
 });

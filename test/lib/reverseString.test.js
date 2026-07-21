@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import reverseString from '../../src/lib/strings/reverseString.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const reverseString = require('../../src/lib/strings/reverseString.js');
-
-test('reverseString returns the expected result', () => {
-  assert.deepStrictEqual(reverseString('abc'), 'cba');
+describe('reverseString', () => {
+  it('returns the expected result', () => {
+    expect(reverseString('abc')).toBe('cba');
+  });
 });

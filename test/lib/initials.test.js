@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import initials from '../../src/lib/strings/initials.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const initials = require('../../src/lib/strings/initials.js');
-
-test('initials returns the expected result', () => {
-  assert.deepStrictEqual(initials('John Doe'), 'JD');
+describe('initials', () => {
+  it('returns the expected result', () => {
+    expect(initials('John Doe')).toBe('JD');
+  });
 });

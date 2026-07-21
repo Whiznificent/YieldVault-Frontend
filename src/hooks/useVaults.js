@@ -8,6 +8,7 @@ import * as vaultService from '../services/vault.js';
  *   stats: object|null,
  *   loading: boolean,
  *   error: string|null,
+ *   lastUpdated: Date|null,
  *   reload: () => void,
  * }}
  */
@@ -16,6 +17,7 @@ export function useVaults() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -27,6 +29,7 @@ export function useVaults() {
       ]);
       setVaults(list);
       setStats(protocolStats);
+      setLastUpdated(new Date());
     } catch (err) {
       setError(err.message || 'Failed to load vaults');
     } finally {
@@ -38,7 +41,7 @@ export function useVaults() {
     load();
   }, [load]);
 
-  return { vaults, stats, loading, error, reload: load };
+  return { vaults, stats, loading, error, lastUpdated, reload: load };
 }
 
 export default useVaults;

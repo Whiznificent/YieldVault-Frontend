@@ -3,6 +3,7 @@
 @import './components.css';
 @import './home.css';
 @import './responsive.css';
+@import './print.css';
 
 :root {
   --bg: #0f1117;
@@ -187,4 +188,96 @@ h3 {
 
 .loss {
   color: var(--loss);
+}
+
+/* ──────────────────────────────────────────── */
+/* prefers-contrast media query                 */
+/* ──────────────────────────────────────────── */
+
+/* Users who prefer higher contrast get stronger borders and
+   amplified text/background contrast for better readability. */
+@media (prefers-contrast: more) {
+  :root {
+    --border: #4a5068;
+  }
+
+  :root[data-theme='light'] {
+    --border: #8b92a8;
+    --muted: #3a4055;
+    --text: #0d0f15;
+    --bg: #eaecf2;
+  }
+
+  :root:not([data-theme='light']) {
+    --muted: #b0b6cc;
+    --text: #f4f5f9;
+    --bg: #080a0f;
+    --surface: #141720;
+    --surface-2: #1c1f2c;
+  }
+
+  /* Thicker, higher-contrast borders on key surfaces */
+  .navbar,
+  .footer {
+    border-width: 2px;
+  }
+
+  .stat-card,
+  .vault-card,
+  .feature,
+  .position-row {
+    border-width: 2px;
+  }
+
+  /* Stronger visible focus ring */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+  }
+
+  /* Muted text should be more readable */
+  .muted {
+    opacity: 0.85;
+  }
+}
+
+/* Users who prefer lower contrast get softer borders and
+   reduced visual weight (accommodates light sensitivity). */
+@media (prefers-contrast: less) {
+  :root {
+    --border: #1f2330;
+    --muted: #6b7088;
+  }
+
+  :root[data-theme='light'] {
+    --border: #dce0ea;
+    --muted: #8890a8;
+    --text: #3a4055;
+  }
+
+  :root:not([data-theme='light']) {
+    --text: #c8ccd8;
+    --bg: #141720;
+  }
+
+  /* Softer borders */
+  .navbar,
+  .footer {
+    border-width: 1px;
+  }
+
+  .stat-card,
+  .vault-card,
+  .feature,
+  .position-row {
+    border-color: var(--border);
+    border-width: 1px;
+  }
+
+  /* Reduced visual weight for muted elements */
+  .muted {
+    opacity: 0.6;
+  }
 }

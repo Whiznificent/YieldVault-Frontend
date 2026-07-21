@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import titleCase from '../../src/lib/strings/titleCase.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const titleCase = require('../../src/lib/strings/titleCase.js');
-
-test('titleCase returns the expected result', () => {
-  assert.deepStrictEqual(titleCase('hi there'), 'Hi There');
+describe('titleCase', () => {
+  it('returns the expected result', () => {
+    expect(titleCase('hi there')).toBe('Hi There');
+  });
 });

@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import truncate from '../../src/lib/strings/truncate.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const truncate = require('../../src/lib/strings/truncate.js');
-
-test('truncate returns the expected result', () => {
-  assert.deepStrictEqual(truncate('hello', 3), 'hel…');
+describe('truncate', () => {
+  it('returns the expected result', () => {
+    expect(truncate('hello', 3)).toBe('hel…');
+  });
 });

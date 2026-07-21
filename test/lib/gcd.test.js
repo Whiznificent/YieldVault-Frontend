@@ -1,10 +1,8 @@
-'use strict';
+import { describe, it, expect } from 'vitest';
+import gcd from '../../src/lib/numbers/gcd.js';
 
-const assert = require('node:assert');
-const { test } = require('node:test');
-
-const gcd = require('../../src/lib/numbers/gcd.js');
-
-test('gcd returns the expected result', () => {
-  assert.deepStrictEqual(gcd(12, 8), 4);
+describe('gcd', () => {
+  it('returns the expected result', () => {
+    expect(gcd(12, 8)).toBe(4);
+  });
 });
