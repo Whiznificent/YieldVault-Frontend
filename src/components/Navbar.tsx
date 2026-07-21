@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import WalletButton from './WalletButton';
 import ThemeToggle from './ThemeToggle';
+import SlippageTolerance from './SlippageTolerance';
 import TimezoneSelector from './TimezoneSelector';
 
 /**
@@ -71,6 +72,9 @@ export default function Navbar() {
           Wizard
         </NavLink>
       </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <SlippageTolerance />
+        <ThemeToggle />
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
         <ThemeToggle />
         <TimezoneSelector />

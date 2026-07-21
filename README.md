@@ -43,6 +43,10 @@ src/
 - Multi-step form wizard (`FormWizard`) for any guided step-by-step flow — reusable component with validation, animated transitions, progress tracking, and keyboard support
 - Wizard demo page at `/wizard-demo` showcasing a 4-step "Create Vault" form example
 - Positions list with per-vault value and earned yield
+- **Resizable table columns** — data tables feature interactive column resize handles for customizing column widths
+- **Amount input with thousands separators** — deposit and withdraw forms now display amounts with comma separators for better readability (e.g., 1,000,000)
+- **Slippage tolerance setting** — users can configure their maximum acceptable price slippage for transactions with preset options (0.1%, 0.5%, 1.0%) or custom values, persisted to localStorage
+- **Asset preference** — remembers the last used asset in the wizard and pre-selects it on subsequent visits, persisted to localStorage
 - Mock Stellar wallet (connect/disconnect, balances, signing)
 - Loading, error and empty states throughout
 - **Browser font scaling** — all font sizes use `rem` units and layout

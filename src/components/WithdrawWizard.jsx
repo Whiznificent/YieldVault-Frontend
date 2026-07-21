@@ -2,6 +2,7 @@ import { useState } from 'react';
 import FormWizard from './FormWizard.jsx';
 import { useWallet } from '../hooks/useWallet.js';
 import { usePositions } from '../hooks/usePositions.js';
+import { useAppContext } from '../context/AppContext';
 import { validateWithdraw } from '../utils/validate.js';
 import { previewWithdraw } from '../utils/shares.js';
 import { formatAmount, formatDate } from '../utils/format.js';
@@ -19,6 +20,7 @@ import { useAppContext } from '../context/AppContext';
 export default function WithdrawWizard({ vault, onSuccess }) {
   const { isConnected } = useWallet();
   const { positions } = usePositions();
+  const { slippageTolerance } = useAppContext();
   const { timezone } = useAppContext();
   const [submitting, setSubmitting] = useState(false);
   const [receipt, setReceipt] = useState(null);
@@ -142,6 +144,10 @@ export default function WithdrawWizard({ vault, onSuccess }) {
           </span>
         </div>
         <div className="wizard-review-divider" />
+        <div className="wizard-review-row">
+          <span className="wizard-review-label">Slippage tolerance</span>
+          <span className="wizard-review-value">{slippageTolerance}%</span>
+        </div>
         <div className="wizard-review-row">
           <span className="wizard-review-label">Remaining position</span>
           <span className="wizard-review-value">

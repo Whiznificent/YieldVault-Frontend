@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import * as walletService from '../services/wallet.js';
 
 /**
@@ -7,12 +7,29 @@ import * as walletService from '../services/wallet.js';
  */
 const AppContext = createContext(null);
 
+const SLIPPAGE_STORAGE_KEY = 'yieldvault:slippage-tolerance';
+const ASSET_STORAGE_KEY = 'yieldvault:last-asset';
+
 export function AppProvider({ children }) {
   const [address, setAddress] = useState(null);
   const [balances, setBalances] = useState({});
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState(null);
   const [walletNetwork, setWalletNetwork] = useState(null);
+  const [slippageTolerance, setSlippageTolerance] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      const stored = localStorage.getItem(SLIPPAGE_STORAGE_KEY);
+      if (stored) return Number(stored);
+    }
+    return 0.5; // Default 0.5%
+  });
+  const [lastAsset, setLastAsset] = useState(() => {
+    if (typeof localStorage !== 'undefined') {
+      const stored = localStorage.getItem(ASSET_STORAGE_KEY);
+      if (stored) return stored;
+    }
+    return null; // No default asset
+  });
 
   const connect = useCallback(async () => {
     setConnecting(true);
@@ -38,12 +55,34 @@ export function AppProvider({ children }) {
     setWalletNetwork(null);
   }, []);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(SLIPPAGE_STORAGE_KEY, String(slippageTolerance));
+    } catch {
+      /* storage unavailable — ignore */
+    }
+  }, [slippageTolerance]);
+
+  useEffect(() => {
+    try {
+      if (lastAsset) {
+        localStorage.setItem(ASSET_STORAGE_KEY, lastAsset);
+      }
+    } catch {
+      /* storage unavailable — ignore */
+    }
+  }, [lastAsset]);
+
   const value = {
     address,
     balances,
     connecting,
     error,
     walletNetwork,
+    slippageTolerance,
+    setSlippageTolerance,
+    lastAsset,
+    setLastAsset,
     isConnected: Boolean(address),
     connect,
     disconnect,
