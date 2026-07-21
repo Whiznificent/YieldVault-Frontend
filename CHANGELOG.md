@@ -25,6 +25,12 @@ project follows [Semantic Versioning](https://semver.org/).
 - Vault metadata and risk-tier constants under `src/constants/vaults.js`.
 - Opt-in light theme via a persisted `data-theme` attribute.
 
+### Changed
+
+- Added precision loss protection for large amounts in deposit/withdraw flows
+  by implementing `safeParseNumber` helper that validates against
+  `Number.MAX_SAFE_INTEGER` before parsing numeric values.
+
 ## [0.1.0]
 
 ### Added

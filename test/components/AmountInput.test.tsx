@@ -114,4 +114,25 @@ describe('AmountInput', () => {
     const input = screen.getByRole('textbox');
     expect(input).toHaveValue('0');
   });
+
+  it('guards against precision loss on very large numbers', () => {
+    const maxSafe = Number.MAX_SAFE_INTEGER;
+    render(<AmountInput value={String(maxSafe)} onChange={() => {}} />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('9,007,199,254,740,991');
+  });
+
+  it('does not format numbers exceeding MAX_SAFE_INTEGER', () => {
+    const tooLarge = String(Number.MAX_SAFE_INTEGER + 1);
+    render(<AmountInput value={tooLarge} onChange={() => {}} />);
+    const input = screen.getByRole('textbox');
+    // Should display the raw string since it cannot be safely parsed
+    expect(input).toHaveValue(tooLarge);
+  });
+
+  it('handles large numbers within safe range', () => {
+    render(<AmountInput value="9007199254740990" onChange={() => {}} />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveValue('9,007,199,254,740,990');
+  });
 });

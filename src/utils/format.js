@@ -4,6 +4,41 @@
  */
 
 /**
+ * Safely parse a value to a number, checking for precision loss.
+ * Returns null if the value would lose precision.
+ * @param {string|number} value
+ * @returns {number|null}
+ */
+export function safeParseNumber(value) {
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value)) return null;
+    // Check if the number is within safe integer range
+    if (Math.abs(value) > Number.MAX_SAFE_INTEGER) {
+      return null;
+    }
+    return value;
+  }
+  
+  if (typeof value === 'string' && value.trim() !== '') {
+    const num = Number(value);
+    if (!Number.isFinite(num)) return null;
+    
+    // Check for precision loss by converting back to string and comparing
+    const strValue = value.trim().replace(/,/g, '');
+    const numStr = String(num);
+    
+    // If the original string has more digits than can be safely represented
+    if (strValue.length > 15 && Math.abs(num) > Number.MAX_SAFE_INTEGER) {
+      return null;
+    }
+    
+    return num;
+  }
+  
+  return null;
+}
+
+/**
  * Format a number as a currency-style amount with thousands separators.
  * @param {number} value
  * @param {number} [decimals=2]
