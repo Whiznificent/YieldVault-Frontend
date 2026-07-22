@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './ChartContainer.css';
+import html2canvas from 'html2canvas';
+import Button from './Button';
 
 /**
  * ChartContainer: A responsive wrapper for chart components.
@@ -14,6 +16,22 @@ export default function ChartContainer({
   className = '',
   style = {},
 }) {
+  const containerRef = useRef(null);
+
+  const downloadChart = async () => {
+    if (!containerRef.current) return;
+    const canvas = await html2canvas(containerRef.current);
+    canvas.toBlob(blob => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'chart.png';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+  };
+
   const containerStyle = {
     // `aspectRatio` works in Chrome, Firefox, Safari (>=14). For older
     // browsers we set a padding‑bottom fallback via custom CSS class.
@@ -25,8 +43,10 @@ export default function ChartContainer({
     <div
       className={`chart-container ${className}`.trim()}
       style={containerStyle}
+      ref={containerRef}
     >
       {children}
+      <Button variant="secondary" onClick={downloadChart}>Download</Button>
     </div>
   );
 }
